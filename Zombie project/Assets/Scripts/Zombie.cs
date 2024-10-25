@@ -39,11 +39,26 @@ public class Zombie : LivingEntity
 
     private void Awake() {
         // 초기화
-    }
+        // 게임 오브젝트부터 사용활 컴포넌트 가져오기
+        zombieAnimator = GetComponent<Animator>();
+        zombieAudioPlayer = GetComponent<AudioSource>(); 
+        zombieRenderer = GetComponent<Renderer>();
+}
 
     // 좀비 AI의 초기 스펙을 결정하는 셋업 메서드
     public void Setup(ZombieData zombieData) {
-        
+        // 체력 설정
+        startingHealth = zombieData.health;
+        health = zombieData.health;
+
+        // 공격력
+        damage = zombieData.damage;
+        // 내비메시 에이전트의 이동 속도 설정
+        navMeshAgent.speed = zombieData.speed;
+        // 랜더러가 사용 중인 머테리얼의 컬러를 변경, 외형 색이 변함
+        zombieRenderer.material.color = zombieData.skinColor;
+
+         zombieRenderer = GetComponentInChildren<Renderer>();
     }
 
     private void Start() {

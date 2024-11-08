@@ -99,7 +99,7 @@ public class Zombie : LivingEntity
                     LivingEntity livingEntity = colliders[i].GetComponent<LivingEntity>();
 
                     // LivingEntity 컴포넌트가 존재하며, 해당 LivingEntity 가 살아 잇다면
-                    if (livingEntity != null && livingEntity.dead)
+                    if (livingEntity != null && !livingEntity.dead)
                     {
                         // 추적 대상을 해당 LivingEntity로 설정
                         targetEntity = livingEntity;

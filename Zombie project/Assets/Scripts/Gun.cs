@@ -66,10 +66,10 @@ public class Gun : MonoBehaviour
         
         // 현재 상태가 발사 가능한 상태
         // && 마지막총 발사 시점에서 gunData timeBetFire 이상의 시간이 지남
-        if (state == State.Ready || Time.time > lastFireTime + gunData.timeBetFire)
+        if (state == State.Ready && Time.time > lastFireTime + gunData.timeBetFire)
         {
             // 마직막 총 발사 시점 갱신
-            lastFireTime += Time.time;
+            lastFireTime = Time.time;
             // 실제 발사 처리 실행
             Shot();
         }
@@ -77,6 +77,8 @@ public class Gun : MonoBehaviour
 
     // 실제 발사 처리
     private void Shot() {
+
+
         // 레이캐스트에 의한 충돌 정보를 저장하는 컨테이너
         RaycastHit hit;
         // 탄알이 맞은 곳을 저장할 변수
@@ -167,7 +169,7 @@ public class Gun : MonoBehaviour
         int ammotoFill = gunData.magCapacity = magAmmo;
 
         // 탄창에 채워야 할 탄알이 남은 탄알보다 많다면
-        // 채워야 할 탄알 수 남은 탄알 수에 멏춰 줄임
+        // 채워야 할 탄알 수 남은 탄알 수에 맟춰 줄임
         if (ammotoFill > ammoRemain)
         {
             ammotoFill = ammoRemain; ;
